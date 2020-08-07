@@ -1,0 +1,7 @@
+.nav-wrapper {
+  padding: 0 50px;
+}
+
+.active {
+  background-color: rgba(165, 42, 42, 0.253);
+}

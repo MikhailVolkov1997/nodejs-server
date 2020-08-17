@@ -5,3 +5,17 @@
 .active {
   background-color: rgba(165, 42, 42, 0.253);
 }
+
+.price {
+  font-size: 2rem;
+}
+
+.card-action{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+strong {
+  font-size: 2rem;
+}

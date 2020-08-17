@@ -1,7 +1,12 @@
 const express = require("express");
+const path = require('path');
 const exphbs = require("express-handlebars");
+const homeRoutes = require("./routes/home");
+const addRoutes = require("./routes/add");
+const coursesRoutes = require("./routes/courses");
+const cardRoutes = require('./routes/card')
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -11,34 +16,20 @@ const hbs = exphbs.create({
 });
 
 // make folder public static
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.engine("hbs", hbs.engine);
 
 app.set("view engine", "hbs");
 app.set("views", "views");
 
-app.get("/", (req, res) => {
-  res.render("index", {
-    title: "Home page",
-    isHome: true,
-  });
-});
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/courses", (req, res) => {
-  res.render("courses", {
-    title: "Courses",
-    isCourses: true,
-  });
-});
-
-app.get("/add", (req, res) => {
-  res.render("add", {
-    title: "Add new course",
-    isAdd: true,
-  });
-});
+app.use("/", homeRoutes);
+app.use("/add", addRoutes);
+app.use("/courses", coursesRoutes);
+app.use('/card', cardRoutes)
 
 app.listen(PORT, () => {
-  console.log("Server is running...");
+  console.log(`Server is running on ${PORT}`);
 });
